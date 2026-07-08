@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGrow AI Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #030706; color: #e3f0ea; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+    <!-- Header -->
+    <header class="p-4 border-b border-gray-800/80 flex justify-between items-center bg-gray-950/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h1 class="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">SmartGrow AI Management</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-xs px-2.5 py-1 bg-green-500/20 text-green-400 rounded-full border border-green-500/30 font-semibold">Node #1: Active</span>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container mx-auto px-6 py-8 flex-grow">
+        <!-- Stats Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gray-900/30 border border-gray-800/80 p-5 rounded-2xl">
+                <div class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Soil Moisture</div>
+                <div class="text-2xl font-bold mt-1 text-emerald-400" id="moisture-val">42%</div>
+                <div class="text-xs text-gray-500 mt-2" id="moisture-status">State: Drying</div>
+            </div>
+            <div class="bg-gray-900/30 border border-gray-800/80 p-5 rounded-2xl">
+                <div class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Ambient Temperature</div>
+                <div class="text-2xl font-bold mt-1 text-teal-400">24°C</div>
+                <div class="text-xs text-gray-500 mt-2">Optimal range: 18-28°C</div>
+            </div>
+            <div class="bg-gray-900/30 border border-gray-800/80 p-5 rounded-2xl">
+                <div class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Reservoir Level</div>
+                <div class="text-2xl font-bold mt-1 text-blue-400" id="reservoir-val">88%</div>
+                <div class="text-xs text-gray-500 mt-2">Volume: 4.2 Gallons</div>
+            </div>
+            <div class="bg-gray-900/30 border border-gray-800/80 p-5 rounded-2xl">
+                <div class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Sunlight Index</div>
+                <div class="text-2xl font-bold mt-1 text-yellow-400">6.5 hrs</div>
+                <div class="text-xs text-gray-500 mt-2">Full Sun Exposure</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Hydroponics Gauge chart simulated -->
+            <div class="bg-gray-900/30 border border-gray-800/80 p-6 rounded-2xl md:col-span-2">
+                <h3 class="text-lg font-semibold text-white mb-4">Moisture Telemetry History</h3>
+                <div class="h-64 bg-gray-950 rounded-xl relative overflow-hidden border border-gray-850 flex flex-col justify-between p-4">
+                    <!-- Grid -->
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+                    <!-- Fake Line Chart -->
+                    <svg class="w-full h-48 z-10" viewBox="0 0 500 200">
+                        <path d="M 0 150 Q 100 120 200 130 T 400 90 T 500 70" fill="none" stroke="var(--primary)" stroke-width="3" style="stroke:#3df2a5;"></path>
+                        <!-- Secondary tracker line -->
+                        <path d="M 0 180 Q 150 140 300 160 T 500 120" fill="none" stroke="var(--secondary)" stroke-width="2" style="stroke:#00d4d4; opacity: 0.4;"></path>
+                    </svg>
+                    <div class="flex justify-between text-xs text-gray-500 z-10">
+                        <span>12 Hours Ago</span>
+                        <span>6 Hours Ago</span>
+                        <span>Just Now</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Hydro controller -->
+            <div class="bg-gray-900/30 border border-gray-800/80 p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Irrigation Controls</h3>
+                    <p class="text-xs text-gray-500 mb-6">Test dynamic watering relays below:</p>
+                    <div class="space-y-4">
+                        <button onclick="triggerWatering()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold text-sm rounded-xl transition shadow-lg shadow-emerald-500/10">Trigger Valve (Water Now)</button>
+                        <button onclick="simulateDrying()" class="w-full py-2 bg-gray-900 hover:bg-gray-800 text-xs font-semibold rounded-lg border border-gray-700/60 transition">Force Dry Mode</button>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-gray-950/60 border border-gray-800/80 rounded-xl">
+                    <div class="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Valve Status</div>
+                    <div class="text-xs text-emerald-400 font-semibold mt-1" id="valve-log">Solenoid Closed | Relay State: Idle</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-6 border-t border-gray-800/80 text-center text-xs text-gray-500">
+        &copy; 2026 SmartGrow AI. Powered by NexusOS Multi-Agent Engine.
+    </footer>
+
+    <script>
+        function triggerWatering() {
+            const moist = document.getElementById('moisture-val');
+            const status = document.getElementById('moisture-status');
+            const res = document.getElementById('reservoir-val');
+            const log = document.getElementById('valve-log');
+
+            moist.textContent = '82%';
+            moist.className = 'text-2xl font-bold mt-1 text-blue-400';
+            status.textContent = 'State: Fully Saturated';
+            res.textContent = '84%';
+            log.textContent = 'Solenoid OPEN | Water relay active for 5s.';
+            log.className = 'text-xs text-blue-400 font-semibold mt-1 animate-pulse';
+
+            setTimeout(() => {
+                log.textContent = 'Solenoid Closed | Target moisture reached.';
+                log.className = 'text-xs text-emerald-400 font-semibold mt-1';
+            }, 3000);
+        }
+
+        function simulateDrying() {
+            const moist = document.getElementById('moisture-val');
+            const status = document.getElementById('moisture-status');
+            const log = document.getElementById('valve-log');
+
+            moist.textContent = '22%';
+            moist.className = 'text-2xl font-bold mt-1 text-rose-500 animate-pulse';
+            status.textContent = 'State: Low Moisture Warning!';
+            log.textContent = 'WARNING: Soil moisture fell below trigger thresholds.';
+            log.className = 'text-xs text-rose-400 font-semibold mt-1';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusOS AI Workspace - Multi-Agent Engine Control</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Workspace Specific Override Styles */
+        .workspace-layout {
+            padding-top: 7rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding-bottom: 5rem;
+        }
+
+        .config-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .prompt-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .workspace-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition-smooth);
+        }
+
+        .workspace-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Generation Status Panels */
+        .generation-panel {
+            display: none; /* Revealed during generation */
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .agent-steps-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .agent-step-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.875rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .agent-step-item.active {
+            border-color: var(--primary);
+            background: rgba(245, 158, 11, 0.05);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.05);
+        }
+
+        .agent-step-item.completed {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .step-status-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+        }
+
+        .step-spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(245, 158, 11, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Live Output Panel */
+        .results-panel {
+            display: none; /* Revealed when done */
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .results-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--gradient-hero);
+            color: var(--white);
+            border-color: transparent;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .preview-pane-container {
+            width: 100%;
+            height: 600px;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            background: rgba(8, 7, 12, 0.9);
+            border: 1px solid var(--border-color);
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+
+        .md-preview-pane {
+            width: 100%;
+            height: 100%;
+            padding: 2.5rem;
+            overflow-y: auto;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .md-preview-pane::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .md-preview-pane::-webkit-scrollbar-thumb {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        .md-preview-pane h1 { font-size: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .md-preview-pane h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; }
+        .md-preview-pane h3 { font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .md-preview-pane p { margin-bottom: 1.25rem; }
+        .md-preview-pane ul, .md-preview-pane ol { margin-left: 2rem; margin-bottom: 1.25rem; }
+        .md-preview-pane li { margin-bottom: 0.5rem; }
+        .md-preview-pane code { background: rgba(255,255,255,0.06); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.9rem; }
+        .md-preview-pane blockquote { border-left: 4px solid var(--primary); padding-left: 1rem; color: var(--text-muted); margin-bottom: 1.25rem; font-style: italic; }
+
+        /* SVG Graph Styles */
+        .kg-node {
+            cursor: pointer;
+            transition: r 0.3s ease, filter 0.3s ease;
+        }
+        .kg-node:hover {
+            filter: brightness(1.2) drop-shadow(0 0 8px rgba(245,158,11,0.5));
+        }
+        .kg-link {
+            stroke: rgba(255,255,255,0.1);
+            stroke-width: 1.5px;
+            stroke-dasharray: 4 4;
+            transition: stroke 0.3s, stroke-width 0.3s;
+        }
+        .kg-text {
+            fill: #FFFBEB;
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                NexusOS AI
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#workforce" class="nav-link">AI Agents</a></li>
+                <li><a href="index.html#features" class="nav-link">Features</a></li>
+                <li><a href="index.html#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="workspace.html" class="nav-link active">Operational Workspace</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" onclick="openSupportModal()">Request Support</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container workspace-layout">
+        
+        <div class="section-header" style="margin-bottom: 2rem;">
+            <span class="section-tag">AI Orchestrator</span>
+            <h1 class="section-title">NexusOS Multi-Agent Workspace</h1>
+            <p class="section-desc">Submit any startup idea. Our autonomous workforce will research, plan, design, write real code prototypes, and audit the results.</p>
+        </div>
+
+        <!-- AI Workspace Dashboard Stats -->
+        <div class="dashboard-stats" style="border-radius: var(--border-radius-lg); margin-bottom: 2rem; border: 1px solid var(--border-color); background: rgba(14, 12, 22, 0.4); grid-template-columns: repeat(6, 1fr);">
+            <div class="stat-item">
+                <div class="stat-val">12</div>
+                <div class="stat-lbl">Active Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">18</div>
+                <div class="stat-lbl">AI Agents Online</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">142</div>
+                <div class="stat-lbl">Files Generated</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">340h</div>
+                <div class="stat-lbl">Hours Saved</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">12k</div>
+                <div class="stat-lbl">KB Documents</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">98%</div>
+                <div class="stat-lbl">Success Rate</div>
+            </div>
+        </div>
+
+        <!-- Configuration and Input Panel -->
+        <div class="grid-layout" style="display: grid; grid-template-columns: 1fr; gap: 2rem;" id="input-container">
+            <!-- API Key Configuration Card -->
+            <div class="glass-panel config-card">
+                <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="key" style="width: 18px; height: 18px; color: var(--primary);"></i>
+                    Google Gemini API Key
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                    Enter your Gemini API key to run a live AI generation. If left blank, NexusOS will generate a high-fidelity simulated startup workspace package. Get a key from the 
+                    <a href="https://aistudio.google.com/" target="_blank" style="color: var(--primary); text-decoration: underline;">Google AI Studio</a>.
+                </p>
+                <input type="password" id="gemini-api-key" class="form-input" placeholder="AIzaSy..." style="width: 100%; max-width: 480px;">
+            </div>
+
+            <!-- Prompt Input Card -->
+            <div class="glass-panel prompt-card">
+                <h3 style="font-size: 1.25rem;">Explain Your Startup Goal</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">Describe the product capability, service sector, target users, or design aesthetic you are targeting.</p>
+                <textarea id="startup-prompt" class="workspace-textarea" placeholder="Example: A smart plant tracker application with dashboards to monitor soil moisture, alert the user, and schedule automatic watering cycles..."></textarea>
+                <button class="btn btn-primary" id="launch-engine-btn" style="width: max-content; gap: 0.5rem;">
+                    <i data-lucide="zap" style="width: 18px; height: 18px;"></i>
+                    Launch Multi-Agent Engine
+                </button>
+            </div>
+        </div>
+
+        <!-- Generation Progress Panel -->
+        <div class="generation-panel" id="progress-container">
+            <!-- Sidebar: Agent Progress -->
+            <div class="glass-panel agent-steps-card">
+                <h3 style="font-size: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem;">Visual Workflow Stepper</h3>
+                
+                <div class="agent-step-item" id="step-submitted">
+                    <span>1. Idea Submitted</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-research">
+                    <span>2. Market Research (UX Research AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-planning">
+                    <span>3. Business Plan (Business Analyst AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-designer">
+                    <span>4. UI Design (UX Designer AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-developer">
+                    <span>5. App Development (Developer AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-testing">
+                    <span>6. Product Testing (QA Engineer AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-marketing">
+                    <span>7. Marketing Setup (SEO Expert AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-deployment">
+                    <span>8. Cloud Deployment (DevOps AI)</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+                <div class="agent-step-item" id="step-complete">
+                    <span>9. Complete & Handover</span>
+                    <span class="step-status-icon"><i data-lucide="minus" style="color: var(--text-muted);"></i></span>
+                </div>
+            </div>
+
+            <!-- Terminal output stream -->
+            <div class="glass-panel" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; height: 500px;">
+                <div class="terminal-header">
+                    <span style="font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="cpu" style="width: 14px; height: 14px; color: var(--primary);"></i>
+                        AI Agent Orchestrator logs
+                    </span>
+                    <span id="orchestration-status" style="font-size: 0.75rem; color: var(--primary);">ACTIVE COMPILE</span>
+                </div>
+                <div class="terminal-panel" id="orchestrator-terminal" style="height: 100%; max-height: 400px;">
+                    <div class="terminal-line"><span class="term-prompt">&gt;</span><span>Ready for deployment. Waiting for launcher triggers...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generation Results Container -->
+        <div class="results-panel" id="results-container">
+            <div class="results-header">
+                <div>
+                    <h3 id="generated-title" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Smart Plant Hydrator</h3>
+                    <p id="generated-subtitle" style="font-size: 0.9rem; color: var(--text-secondary);">Workspace packages compiled successfully</p>
+                </div>
+                <div class="results-tabs">
+                    <button class="tab-btn active" data-tab="preview">App Live Preview</button>
+                    <button class="tab-btn" data-tab="graph">Knowledge Graph</button>
+                    <button class="tab-btn" data-tab="research">Market Research</button>
+                    <button class="tab-btn" data-tab="plan">Execution Plan</button>
+                    <button class="tab-btn" data-tab="marketing">Marketing System</button>
+                    <button class="tab-btn" data-tab="takeover">Ownership Handover</button>
+                </div>
+            </div>
+
+            <!-- Result Panes container -->
+            <div class="preview-pane-container">
+                <!-- App Preview Iframe -->
+                <iframe id="results-iframe" class="preview-iframe" style="display: block;"></iframe>
+
+                <!-- Knowledge Graph Pane -->
+                <div id="results-graph" class="md-preview-pane" style="display: none; padding: 1rem; position: relative;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.5rem; height: 100%;">
+                        <!-- SVG Canvas -->
+                        <div style="position: relative; background: #020203; border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                            <svg id="kg-svg-canvas" width="100%" height="100%" style="min-height: 480px;"></svg>
+                        </div>
+                        <!-- Detail sidebar -->
+                        <div class="glass-panel" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; overflow-y: auto;">
+                            <h4 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; margin-top:0;">
+                                <i data-lucide="network" style="color: var(--primary);"></i>
+                                Entity Details
+                            </h4>
+                            <div id="kg-node-title" style="font-weight: 700; font-size: 1.2rem; color: var(--white);">Click a node to inspect relationships</div>
+                            <p id="kg-node-desc" style="font-size: 0.9rem; color: var(--text-secondary);">Select any circle on the graph model to see associated database records, competitive features, monetization logic, or campaign hooks.</p>
+                            <div id="kg-node-extra" style="font-size: 0.85rem; color: var(--text-muted);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Markdown Content Renderers -->
+                <div id="results-research" class="md-preview-pane" style="display: none;"></div>
+                <div id="results-plan" class="md-preview-pane" style="display: none;"></div>
+                <div id="results-marketing" class="md-preview-pane" style="display: none;"></div>
+                <div id="results-takeover" class="md-preview-pane" style="display: none;"></div>
+            </div>
+
+            <!-- Analytical Confidence scores -->
+            <div class="glass-panel" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; border: 1px solid var(--border-color);">
+                <h4 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); margin:0;">Generation Analytics & Confidence Scores</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center;">
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--border-radius-lg);">
+                        <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--primary);">96%</div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-top: 0.25rem;">Research Confidence</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--border-radius-lg);">
+                        <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--secondary);">91%</div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-top: 0.25rem;">Business Feasibility</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--border-radius-lg);">
+                        <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--accent);">94%</div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-top: 0.25rem;">Code Quality</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--border-radius-lg);">
+                        <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--accent-pink);">89%</div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-top: 0.25rem;">Market Potential</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="copyAppCode()" style="gap: 0.5rem;">
+                    <i data-lucide="clipboard"></i>
+                    Copy App Source Code
+                </button>
+                <a id="download-app-btn" href="#" download="app.html" class="btn btn-secondary" style="gap: 0.5rem;">
+                    <i data-lucide="download"></i>
+                    Download app.html
+                </a>
+                <button class="btn btn-secondary" onclick="restartWorkspace()" style="gap: 0.5rem;">
+                    <i data-lucide="rotate-ccw"></i>
+                    Build Another Startup
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom" style="border-top: none; padding-top: 0;">
+            <div>&copy; 2026 NexusOS AI Inc. Operational Workspace Console. All rights reserved.</div>
+            <div class="social-links" style="margin: 0;">
+                <a href="https://linkedin.com" target="_blank" class="social-link" style="width: 32px; height: 32px;"><i data-lucide="linkedin" style="width:16px; height:16px;"></i></a>
+                <a href="https://github.com" target="_blank" class="social-link" style="width: 32px; height: 32px;"><i data-lucide="github" style="width:16px; height:16px;"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Support Request Modal -->
+    <div class="modal-overlay" id="support-modal" style="display: none;">
+        <div class="modal-container" style="max-width: 500px; padding: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--white); margin:0;">Request Engine Support</h3>
+                <button onclick="closeSupportModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer;"><i data-lucide="x" style="width: 20px; height: 20px;"></i></button>
+            </div>
+            <form id="workspace-support-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.85rem; color: var(--text-secondary);">Full Name</label>
+                    <input type="text" id="support-name" class="form-input" style="background: rgba(0,0,0,0.2);" placeholder="Alex Rivera" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.85rem; color: var(--text-secondary);">Corporate Email</label>
+                    <input type="email" id="support-email" class="form-input" style="background: rgba(0,0,0,0.2);" placeholder="alex@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" style="font-size: 0.85rem; color: var(--text-secondary);">Support Details</label>
+                    <textarea id="support-msg" class="form-input" style="background: rgba(0,0,0,0.2); min-height: 100px;" placeholder="Describe what support you need with your AI compiling thread..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem; width: 100%;">Submit Support Ticket</button>
+                <div class="form-status" id="support-status" style="display: none; margin-top: 0.5rem;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="workspace.js"></script>
+</body>
+</html>

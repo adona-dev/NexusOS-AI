@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Test User",
+        "email": "test@example.com",
+        "company": "Test Company",
+        "message": "Hello, this is a test inquiry.",
+        "timestamp": "2026-07-08T14:38:09.479Z"
+    },
+    {
+        "name": "Second User",
+        "email": "second@example.com",
+        "company": "Second Company",
+        "message": "Another test message.",
+        "timestamp": "2026-07-08T14:40:11.202Z"
+    },
+    {
+        "name": "Third User",
+        "email": "third@example.com",
+        "company": "Third Company",
+        "message": "Third test message.",
+        "timestamp": "2026-07-08T14:42:37.772Z"
+    },
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "company": "Test Org",
+        "message": "This is a test message for verification.",
+        "timestamp": "2026-07-08T14:57:21.522Z"
+    },
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "company": "Test Org",
+        "message": "This is a test message for verification.",
+        "timestamp": "2026-07-08T14:59:44.376Z"
+    }
+]

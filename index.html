@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusOS AI - One Workspace. Thousands of AI Minds.</title>
+    <meta name="description"
+        content="NexusOS AI is the next-generation multi-agent AI Operating System. Work alongside specialized AI agents collaborating in real-time to automate enterprise workflows.">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon"></div>
+                NexusOS AI
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#workforce" class="nav-link">AI Agents</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#industries" class="nav-link">Industries</a></li>
+                <li><a href="#technology" class="nav-link">Technology</a></li>
+                <li><a href="#workflow" class="nav-link">Roadmap</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" onclick="scrollToContact()">Request Demo</button>
+                <button class="btn btn-primary" onclick="window.location.href='workspace.html'">Get Started</button>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content reveal">
+                    <div class="hero-tag">
+                        <div class="hero-tag-glow"></div>
+                        <span>v2.0 Beta: Multi-Agent Collaboration Online</span>
+                    </div>
+                    <h1 class="hero-title">The Next Generation Multi-Agent <span class="gradient-text">AI Operating
+                            System</span></h1>
+                    <p class="hero-subtitle">Work alongside an intelligent workforce of specialized AI agents that can
+                        research, design, code, analyze, automate, and innovate—all within one powerful workspace.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="window.location.href='workspace.html'">Start Free
+                            Trial</button>
+                        <button class="btn btn-secondary" onclick="openDemoModal()">
+                            <i data-lucide="play" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-illustration reveal">
+                    <div class="illustration-sphere">
+                        <div class="core-ai-node">
+                            <i data-lucide="cpu" style="width: 32px; height: 32px; color: var(--white);"></i>
+                        </div>
+                        <div class="floating-agent-node" title="Research AI">
+                            <i data-lucide="search" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div class="floating-agent-node" title="Developer AI">
+                            <i data-lucide="code-2" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div class="floating-agent-node" title="Designer AI">
+                            <i data-lucide="palette" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div class="floating-agent-node" title="Data Analyst AI">
+                            <i data-lucide="bar-chart-3" style="width: 24px; height: 24px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Dashboard Preview Section -->
+        <section class="dashboard-preview" id="dashboard-preview">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">System Status</span>
+                    <h2 class="section-title">Collaborative Control Center</h2>
+                    <p class="section-desc">Watch NexusOS agents coordinate workflows, allocate tasks, and execute
+                        pipelines in real time.</p>
+                </div>
+
+                <div class="dashboard-window">
+                    <!-- Window Bar -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-controls">
+                            <span class="control-dot control-close"></span>
+                            <span class="control-dot control-min"></span>
+                            <span class="control-dot control-max"></span>
+                        </div>
+                        <div class="dashboard-title">
+                            <i data-lucide="terminal" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                            <span>nexus-shell://workspace_prod</span>
+                            <span class="dashboard-badge">Live System</span>
+                        </div>
+                        <div style="width: 50px;"></div>
+                    </div>
+
+                    <!-- Stats Bar -->
+                    <div class="dashboard-stats">
+                        <div class="stat-item">
+                            <div class="stat-val" id="stat-agents">127</div>
+                            <div class="stat-lbl">AI Agents Active</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val" id="stat-tasks">18,542</div>
+                            <div class="stat-lbl">Tasks Completed Today</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val" id="stat-projects">412</div>
+                            <div class="stat-lbl">Projects Running</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val">96%</div>
+                            <div class="stat-lbl">Automation Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val">4.7 PB</div>
+                            <div class="stat-lbl">Knowledge Base</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-val">3.2M</div>
+                            <div class="stat-lbl">Hours Saved</div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Body -->
+                    <div class="dashboard-body">
+                        <!-- Left Sidebar: Agent Workforce selector -->
+                        <aside class="db-sidebar">
+                            <div class="sidebar-title">Active Collaborators</div>
+                            <ul class="agent-list">
+                                <li class="agent-list-item active" data-agent="developer">
+                                    <span class="agent-status-indicator"></span>
+                                    <i data-lucide="code-2" style="width: 16px; height: 16px;"></i>
+                                    <span>Software Engineer AI</span>
+                                </li>
+                                <li class="agent-list-item" data-agent="researcher">
+                                    <span class="agent-status-indicator"></span>
+                                    <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+                                    <span>Research Engine AI</span>
+                                </li>
+                                <li class="agent-list-item" data-agent="analyst">
+                                    <span class="agent-status-indicator"></span>
+                                    <i data-lucide="bar-chart-2" style="width: 16px; height: 16px;"></i>
+                                    <span>Data Analyst AI</span>
+                                </li>
+                                <li class="agent-list-item" data-agent="security">
+                                    <span class="agent-status-indicator"></span>
+                                    <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+                                    <span>Cybersecurity AI</span>
+                                </li>
+                            </ul>
+                        </aside>
+
+                        <!-- Center: Code Terminal & Activity Graph -->
+                        <div class="db-main">
+                            <div class="terminal-header">
+                                <span
+                                    style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Execution
+                                    Console</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);"
+                                    id="terminal-timestamp">TIMESTAMP: ACTIVE</span>
+                            </div>
+                            <div class="terminal-panel" id="terminal-panel">
+                                <div class="terminal-line"><span class="term-prompt">&gt;</span><span>nexusos
+                                        --initialize-environment</span></div>
+                                <div class="terminal-line"><span class="term-prompt">&gt;</span><span
+                                        class="term-success">Environment setup complete. 127 AI minds
+                                        synchronized.</span></div>
+                                <div class="terminal-line"><span class="term-prompt">&gt;</span><span>system --monitor
+                                        --agent=developer_node_42</span></div>
+                                <div class="terminal-line"><span class="term-prompt">&gt;</span><span
+                                        class="term-tag">[DevAI]</span><span> Refactoring authentication
+                                        middleware...</span></div>
+                                <div class="terminal-line"><span class="term-prompt">&gt;</span><span
+                                        class="term-tag">[DevAI]</span><span class="term-success"> Auth test suite
+                                        passed. Coverage 99.8%. Commit deployed.</span></div>
+                            </div>
+
+                            <div class="chart-container">
+                                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Network
+                                    Resource Allocation</span>
+                                <div class="chart-bars" id="chart-bars">
+                                    <!-- Dynamic Bars (JS populated) -->
+                                    <div class="chart-bar" style="height: 60%;"></div>
+                                    <div class="chart-bar" style="height: 45%;"></div>
+                                    <div class="chart-bar" style="height: 70%;"></div>
+                                    <div class="chart-bar" style="height: 35%;"></div>
+                                    <div class="chart-bar" style="height: 80%;"></div>
+                                    <div class="chart-bar" style="height: 55%;"></div>
+                                    <div class="chart-bar" style="height: 65%;"></div>
+                                    <div class="chart-bar" style="height: 90%;"></div>
+                                    <div class="chart-bar" style="height: 75%;"></div>
+                                    <div class="chart-bar" style="height: 50%;"></div>
+                                    <div class="chart-bar" style="height: 60%;"></div>
+                                    <div class="chart-bar" style="height: 85%;"></div>
+                                    <div class="chart-bar" style="height: 40%;"></div>
+                                    <div class="chart-bar" style="height: 70%;"></div>
+                                    <div class="chart-bar" style="height: 95%;"></div>
+                                </div>
+                                <div class="chart-labels">
+                                    <span>00:00</span>
+                                    <span>04:00</span>
+                                    <span>08:00</span>
+                                    <span>12:00</span>
+                                    <span>16:00</span>
+                                    <span>20:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar: System Feed -->
+                        <aside class="db-right" id="db-feed">
+                            <div class="sidebar-title">Activity Feed</div>
+                            <div class="feed-item">
+                                <div class="feed-time">Just Now</div>
+                                <div class="feed-title">Repository Merge</div>
+                                <div class="feed-desc">Developer AI successfully compiled build #842.</div>
+                            </div>
+                            <div class="feed-item">
+                                <div class="feed-time">2 mins ago</div>
+                                <div class="feed-title">Security Patch</div>
+                                <div class="feed-desc">Cybersecurity AI isolated and patched active API vulnerability.
+                                </div>
+                            </div>
+                            <div class="feed-item">
+                                <div class="feed-time">10 mins ago</div>
+                                <div class="feed-title">Report Generated</div>
+                                <div class="feed-desc">Research AI indexed 1,200 PDF industry studies.</div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Workforce Section -->
+        <section class="workforce" id="workforce">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Intelligent Directory</span>
+                    <h2 class="section-title">Meet Your Specialized <span class="gradient-text">AI Workforce</span></h2>
+                    <p class="section-desc">Instead of a single text box, NexusOS deploys an elite grid of collaborative
+                        agents customized for distinct vertical disciplines.</p>
+                </div>
+
+                <div class="workforce-grid">
+                    <!-- Card 1 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="search"></i>
+                        </div>
+                        <h3>Research AI</h3>
+                        <p>Aggregates context from academic journals, industry databases, and live web sources,
+                            producing comprehensive briefing papers on demand.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="code-2"></i>
+                        </div>
+                        <h3>Software Engineer AI</h3>
+                        <p>Writes unit-tested code, initiates pull requests, executes code refactoring cycles, and fixes
+                            syntax debug logs autonomously.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="palette"></i>
+                        </div>
+                        <h3>Design AI</h3>
+                        <p>Creates vector UI design systems, formats typography, selects matching brand color palettes,
+                            and constructs premium responsive wireframes.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <h3>Marketing AI</h3>
+                        <p>Optimizes search engine campaigns, coordinates high-converting ad copy, writes engaging blog
+                            content, and tracks cross-channel traffic spikes.</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="bar-chart-2"></i>
+                        </div>
+                        <h3>Data Analyst AI</h3>
+                        <p>Cleans messy databases, executes statistical queries, runs predictive regressions, and builds
+                            interactive dashboard reports.</p>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="scale"></i>
+                        </div>
+                        <h3>Legal Advisor AI</h3>
+                        <p>Drafts commercial licensing agreements, audits vendor NDA templates, flags risky clauses, and
+                            tracks changing compliance directives.</p>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="banknote"></i>
+                        </div>
+                        <h3>Finance AI</h3>
+                        <p>Builds dynamic cash flow forecast models, processes multi-currency bills, structures general
+                            ledgers, and detects budget anomalies.</p>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="presentation"></i>
+                        </div>
+                        <h3>Presentation AI</h3>
+                        <p>Outlines visual slide decks, structures complex business narratives, formats clean charts,
+                            and automates slide layout generation.</p>
+                    </div>
+                    <!-- Card 9 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <h3>Cybersecurity AI</h3>
+                        <p>Monitors network firewalls, executes penetration scripts, audits user permissions, and blocks
+                            potential code injection vectors.</p>
+                    </div>
+                    <!-- Card 10 -->
+                    <div class="workforce-card glass-panel">
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="library"></i>
+                        </div>
+                        <h3>Knowledge AI</h3>
+                        <p>Indexes complete organizational wikis, links relevant cross-departmental documentation, and
+                            preserves historical company logs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features Section -->
+        <section class="features" id="features">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Core Features</span>
+                    <h2 class="section-title">Built for Enterprise Operations</h2>
+                    <p class="section-desc">Explore the revolutionary tools integrated directly into the core NexusOS
+                        framework.</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="15" fill="none" stroke="var(--accent)" stroke-width="2" />
+                                <circle cx="100" cy="50" r="20" fill="none" stroke="var(--secondary)"
+                                    stroke-width="2" />
+                                <circle cx="150" cy="50" r="15" fill="none" stroke="var(--accent-pink)"
+                                    stroke-width="2" />
+                                <path d="M65 50 H80 M120 50 H135" stroke="var(--white)" stroke-width="1.5"
+                                    stroke-dasharray="4 4" />
+                            </svg>
+                        </div>
+                        <h3>AI Company Mode</h3>
+                        <p>Launch an entire business architecture from one single concept. Establish cross-agent
+                            structures, sync corporate files, and launch code operations automatically.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="20" width="140" height="60" rx="6" stroke="var(--accent)"
+                                    stroke-width="2" />
+                                <line x1="45" y1="40" x2="115" y2="40" stroke="var(--white)" stroke-width="2" />
+                                <line x1="45" y1="55" x2="95" y2="55" stroke="var(--white)" stroke-width="2" />
+                                <line x1="45" y1="70" x2="135" y2="70" stroke="var(--text-muted)" stroke-width="1.5" />
+                                <circle cx="140" cy="45" r="10" fill="none" stroke="var(--secondary)"
+                                    stroke-width="2" />
+                            </svg>
+                        </div>
+                        <h3>Research Engine</h3>
+                        <p>Analyze thousands of books, corporate PDF reports, web URLs, and database records
+                            simultaneously. Generates citations and source notes.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="100" cy="50" r="12" fill="var(--primary)" />
+                                <circle cx="50" cy="30" r="8" fill="var(--accent)" />
+                                <circle cx="150" cy="30" r="8" fill="var(--accent)" />
+                                <circle cx="60" cy="75" r="8" fill="var(--secondary)" />
+                                <circle cx="140" cy="75" r="8" fill="var(--secondary)" />
+                                <line x1="100" y1="50" x2="50" y2="30" stroke="var(--white)" stroke-width="1" />
+                                <line x1="100" y1="50" x2="150" y2="30" stroke="var(--white)" stroke-width="1" />
+                                <line x1="100" y1="50" x2="60" y2="75" stroke="var(--white)" stroke-width="1" />
+                                <line x1="100" y1="50" x2="140" y2="75" stroke="var(--white)" stroke-width="1" />
+                            </svg>
+                        </div>
+                        <h3>Knowledge Graph</h3>
+                        <p>Visualize the semantic connection between your databases, company files, user queries, and AI
+                            decisions. Trace reasoning tracks step-by-step.</p>
+                    </div>
+                    <!-- Feature 4 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M50 25 C50 15, 150 15, 150 25 C150 35, 50 35, 50 45 C50 55, 150 55, 150 65 C150 75, 50 75, 50 85"
+                                    stroke="var(--accent)" stroke-width="2" />
+                                <circle cx="50" cy="25" r="4" fill="var(--white)" />
+                                <circle cx="150" cy="45" r="4" fill="var(--secondary)" />
+                                <circle cx="50" cy="85" r="4" fill="var(--accent-pink)" />
+                            </svg>
+                        </div>
+                        <h3>Smart Memory</h3>
+                        <p>Retain long-term corporate context. Remember active project specifications, previous user
+                            guidelines, and team workflow outcomes contextually.</p>
+                    </div>
+                    <!-- Feature 5 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M40 30 L20 50 L40 70 M160 30 L180 50 L160 70 M85 25 L115 75"
+                                    stroke="var(--accent)" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <h3>Autonomous Coding</h3>
+                        <p>Identify code compilation anomalies, write custom scripts in multi-stack languages, manage
+                            production packages, and execute code patches.</p>
+                    </div>
+                    <!-- Feature 6 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="40" y="30" width="120" height="40" rx="10" fill="rgba(37, 99, 235, 0.2)"
+                                    stroke="var(--primary)" stroke-width="2" />
+                                <path d="M70 50 H130" stroke="var(--white)" stroke-width="3" stroke-linecap="round" />
+                                <circle cx="85" cy="50" r="5" fill="var(--accent)" />
+                                <circle cx="115" cy="50" r="5" fill="var(--accent)" />
+                            </svg>
+                        </div>
+                        <h3>Meeting Intelligence</h3>
+                        <p>Analyze company conference calls, map distinct speaker notes, summarize team items, and
+                            update action sheets automatically.</p>
+                    </div>
+                    <!-- Feature 7 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="50" y="20" width="100" height="60" rx="4" stroke="var(--white)"
+                                    stroke-width="2" />
+                                <circle cx="80" cy="50" r="12" fill="var(--primary)" fill-opacity="0.5" />
+                                <circle cx="110" cy="50" r="12" fill="var(--secondary)" fill-opacity="0.5" />
+                                <circle cx="95" cy="40" r="10" fill="var(--accent)" fill-opacity="0.3" />
+                            </svg>
+                        </div>
+                        <h3>Creative Studio</h3>
+                        <p>Generate production presentations, brand designs, UI asset grids, marketing banners, and
+                            content briefs within unified platform frames.</p>
+                    </div>
+                    <!-- Feature 8 -->
+                    <div class="feature-card glass-panel">
+                        <div class="feature-visual">
+                            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M30 50 Q70 20, 100 50 T170 50" stroke="var(--accent)" stroke-width="2"
+                                    fill="none" />
+                                <circle cx="30" cy="50" r="6" fill="var(--white)" />
+                                <circle cx="100" cy="50" r="6" fill="var(--secondary)" />
+                                <circle cx="170" cy="50" r="6" fill="var(--accent-pink)" />
+                            </svg>
+                        </div>
+                        <h3>Workflow Automation</h3>
+                        <p>Integrate thousands of platform APIs. Define branching logic, loop tasks, set run schedules,
+                            and streamline standard business routines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industries Section -->
+        <section class="industries" id="industries">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2 class="section-title">Industry Transformation</h2>
+                    <p class="section-desc">NexusOS AI provides customized multi-agent stacks tailored to the unique
+                        operational demands of key industrial sectors.</p>
+                </div>
+
+                <div class="industries-grid">
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="stethoscope"></i></span>
+                        <span class="industry-name">Healthcare</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="graduation-cap"></i></span>
+                        <span class="industry-name">Education</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="coins"></i></span>
+                        <span class="industry-name">Finance</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="factory"></i></span>
+                        <span class="industry-name">Manufacturing</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="shopping-bag"></i></span>
+                        <span class="industry-name">Retail</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="sprout"></i></span>
+                        <span class="industry-name">Agriculture</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="landmark"></i></span>
+                        <span class="industry-name">Government</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="shield-check"></i></span>
+                        <span class="industry-name">Cybersecurity</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="flask-conical"></i></span>
+                        <span class="industry-name">Research</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="rocket"></i></span>
+                        <span class="industry-name">Startups</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="truck"></i></span>
+                        <span class="industry-name">Logistics</span>
+                    </div>
+                    <div class="industry-card glass-panel">
+                        <span class="industry-icon"><i data-lucide="building-2"></i></span>
+                        <span class="industry-name">Smart Cities</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section class="technology" id="technology">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Technology Stack</span>
+                    <h2 class="section-title">Next-Gen Engine Architecture</h2>
+                    <p class="section-desc">Powered by bleeding-edge AI models, secure sandbox environments, and
+                        real-time distributed networks.</p>
+                </div>
+
+                <div class="tech-grid">
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="brain"></i></div>
+                        <div class="tech-content">
+                            <h3>Large Language Models</h3>
+                            <p>Powered by frontier LLMs to ensure advanced contextual analysis and highly precise logic
+                                orchestration.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="eye"></i></div>
+                        <div class="tech-content">
+                            <h3>Multimodal AI</h3>
+                            <p>Process image arrays, structured tables, audio conversations, and written files inside
+                                cohesive framework pipelines.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="database"></i></div>
+                        <div class="tech-content">
+                            <h3>Retrieval-Augmented Generation</h3>
+                            <p>Query external database layers securely to feed contextual, real-time facts directly into
+                                LLM prompt sheets.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="scan"></i></div>
+                        <div class="tech-content">
+                            <h3>Computer Vision</h3>
+                            <p>Index image files, map custom chart coordinates, compile interface layers, and read raw
+                                document text tables.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="mic"></i></div>
+                        <div class="tech-content">
+                            <h3>Speech Recognition</h3>
+                            <p>Convert speaker voice streams to text summaries with extreme precision, parsing context
+                                and action items.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="git-branch"></i></div>
+                        <div class="tech-content">
+                            <h3>Knowledge Graphs</h3>
+                            <p>Trace neural connection models securely to structure organization files and user workflow
+                                actions.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="users"></i></div>
+                        <div class="tech-content">
+                            <h3>AI Agents</h3>
+                            <p>Orchestrate independent, goal-seeking agents that coordinate work routines in parallel to
+                                complete tasks.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="cloud"></i></div>
+                        <div class="tech-content">
+                            <h3>Cloud Computing</h3>
+                            <p>Scale workloads across robust distributed clusters. Fully compatible with AWS, Azure, and
+                                Google Cloud environments.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="link-2"></i></div>
+                        <div class="tech-content">
+                            <h3>API Integrations</h3>
+                            <p>Connect seamlessly to SaaS platforms, databases, APIs, codebases, and custom company
+                                internal systems.</p>
+                        </div>
+                    </div>
+                    <div class="tech-card glass-panel">
+                        <div class="tech-icon"><i data-lucide="workflow"></i></div>
+                        <div class="tech-content">
+                            <h3>Workflow Automation</h3>
+                            <p>Set custom business triggers, schedule loops, map outputs to inputs, and monitor running
+                                automation logs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Workflow Section (Animated Flow) -->
+        <section class="workflow" id="workflow">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Product Workflow</span>
+                    <h2 class="section-title">The Collaborative Lifecycle</h2>
+                    <p class="section-desc">See how an initial idea flows through the NexusOS multi-agent ecosystem to
+                        produce a high-growth deployment.</p>
+                </div>
+
+                <div class="workflow-container">
+                    <div class="workflow-flow">
+                        <!-- Step SVG Line -->
+                        <svg class="workflow-line-svg">
+                            <defs>
+                                <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="var(--accent)" />
+                                    <stop offset="50%" stop-color="var(--secondary)" />
+                                    <stop offset="100%" stop-color="var(--accent-pink)" />
+                                </linearGradient>
+                            </defs>
+                            <path class="flow-path-bg" d="M 0 4 H 1080" />
+                            <path class="flow-path-active" d="M 0 4 H 1080" />
+                        </svg>
+
+                        <!-- Step 1 -->
+                        <div class="workflow-step active">
+                            <div class="step-bubble"><i data-lucide="lightbulb"></i></div>
+                            <div class="step-name">Idea</div>
+                            <div class="step-desc">Input product query</div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="search"></i></div>
+                            <div class="step-name">Research AI</div>
+                            <div class="step-desc">Index target market</div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="drafting-compass"></i></div>
+                            <div class="step-name">Planning AI</div>
+                            <div class="step-desc">Structure specifications</div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="code-2"></i></div>
+                            <div class="step-name">Coding AI</div>
+                            <div class="step-desc">Generate code files</div>
+                        </div>
+                        <!-- Step 5 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="test-tube"></i></div>
+                            <div class="step-name">Testing AI</div>
+                            <div class="step-desc">Validate build code</div>
+                        </div>
+                        <!-- Step 6 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="server"></i></div>
+                            <div class="step-name">Deployment AI</div>
+                            <div class="step-desc">Launch servers</div>
+                        </div>
+                        <!-- Step 7 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="megaphone"></i></div>
+                            <div class="step-name">Marketing AI</div>
+                            <div class="step-desc">Publish content ads</div>
+                        </div>
+                        <!-- Step 8 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="line-chart"></i></div>
+                            <div class="step-name">Analytics AI</div>
+                            <div class="step-desc">Track user clicks</div>
+                        </div>
+                        <!-- Step 9 -->
+                        <div class="workflow-step">
+                            <div class="step-bubble"><i data-lucide="trending-up"></i></div>
+                            <div class="step-name">Growth</div>
+                            <div class="step-desc">Scaling operations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us & Metrics -->
+        <section class="why-choose" id="why-choose">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Value Proposition</span>
+                    <h2 class="section-title">Built for Enterprise Reliability</h2>
+                    <p class="section-desc">Why enterprise operations choose NexusOS AI as their unified machine
+                        intelligence workspace.</p>
+                </div>
+
+                <div class="why-grid">
+                    <!-- Why 1 -->
+                    <div class="why-card glass-panel">
+                        <div class="card-icon-wrapper"><i data-lucide="shield"></i></div>
+                        <h3>Enterprise Security</h3>
+                        <p>Fully SOC2 compliant. End-to-end data encryption, private tenant clouds, and rigid access
+                            rules keep company data protected.</p>
+                    </div>
+                    <!-- Why 2 -->
+                    <div class="why-card glass-panel">
+                        <div class="card-icon-wrapper"><i data-lucide="maximize"></i></div>
+                        <h3>Scalable Architecture</h3>
+                        <p>Execute millions of agent tasks in parallel across high-availability cloud servers. Never
+                            bottlenecks on operational capacity.</p>
+                    </div>
+                    <!-- Why 3 -->
+                    <div class="why-card glass-panel">
+                        <div class="card-icon-wrapper"><i data-lucide="users-2"></i></div>
+                        <h3>Real-Time Collaboration</h3>
+                        <p>Watch teams and AI agents collaborate on documents, files, and build releases inside a single
+                            cohesive dashboard.</p>
+                    </div>
+                    <!-- Why 4 -->
+                    <div class="why-card glass-panel">
+                        <div class="card-icon-wrapper"><i data-lucide="workflow"></i></div>
+                        <h3>Intelligent Automation</h3>
+                        <p>Replace repetitive code steps and manual data analysis. Agents autonomously loop,
+                            logic-branch, and deploy fixes.</p>
+                    </div>
+                </div>
+
+                <!-- Success Metrics Panel -->
+                <div class="metrics-panel glass-panel">
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-num" data-val="500">0</div>
+                            <div class="metric-lbl">Enterprise Clients</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-num" data-val="15">0</div>
+                            <div class="metric-lbl">Million Tasks Automated</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-num" data-val="99">0</div>
+                            <div class="metric-lbl">Customer Satisfaction</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-num" data-val="120">0</div>
+                            <div class="metric-lbl">AI Agents Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Testimonials</span>
+                    <h2 class="section-title">Trusted by Global Innovators</h2>
+                    <p class="section-desc">Hear what leading executives, technology officers, and startup founders are
+                        saying about NexusOS AI.</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card glass-panel">
+                        <div class="testimonial-body">
+                            "NexusOS completely refactored our product development lifecycle. Our engineering team now
+                            designs features alongside the Developer and Tester AIs, doubling our production speed."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100"
+                                alt="Sarah Jenkins" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Sarah Jenkins</h4>
+                                <p>VP of Engineering, VeloTech</p>
+                                <div class="author-rating">
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card glass-panel">
+                        <div class="testimonial-body">
+                            "Running our financial audits and forecasting graphs through the Finance AI has cut down our
+                            reporting cycle from weeks to minutes, highlighting anomalies before they affect our bottom
+                            line."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100"
+                                alt="Marcus Chen" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Marcus Chen</h4>
+                                <p>CFO, HyperScale Labs</p>
+                                <div class="author-rating">
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card glass-panel">
+                        <div class="testimonial-body">
+                            "The security patch automation inside NexusOS AI isolated a zero-day exploit attempt in our
+                            database within 12 seconds, preventing potential data leaks. Absolutely enterprise-grade."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100&h=100"
+                                alt="David Miller" class="author-avatar">
+                            <div class="author-info">
+                                <h4>David Miller</h4>
+                                <p>Chief Security Officer, Sentinel Inc</p>
+                                <div class="author-rating">
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                    <i data-lucide="star" style="width:12px; height:12px; fill:currentColor;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Pricing</span>
+                    <h2 class="section-title">Flexible Plans for Every Scale</h2>
+                    <p class="section-desc">Choose a plan that matches your organization's workload. Save 20% on annual
+                        billing cycles.</p>
+                </div>
+
+                <div class="pricing-toggle-wrapper">
+                    <span class="pricing-toggle-lbl active" id="billing-monthly">Monthly Billing</span>
+                    <div class="pricing-switch-container" id="pricing-switch" aria-label="Toggle billing duration">
+                        <span class="pricing-switch-handle"></span>
+                    </div>
+                    <span class="pricing-toggle-lbl" id="billing-annual">Annual Billing</span>
+                    <span class="pricing-badge">Save 20%</span>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Starter Plan -->
+                    <div class="pricing-card glass-panel">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-plan-name">Starter</h3>
+                            <p class="pricing-plan-desc">Perfect for small teams and developers beginning to experiment
+                                with multi-agent models.</p>
+                            <div class="pricing-cost">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" id="price-starter">29</span>
+                                <span class="price-period">/mo</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Up to 5 Active Agents</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> 10,000 Tasks Completed/mo</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Standard LLM models</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> 50 GB Shared Memory Layer</li>
+                            <li class="pricing-feature-item"
+                                style="color:var(--text-muted); text-decoration:line-through;"><i data-lucide="x"
+                                    style="width:16px; height:16px; color:var(--text-muted);"></i> private RAG Databases
+                            </li>
+                            <li class="pricing-feature-item"
+                                style="color:var(--text-muted); text-decoration:line-through;"><i data-lucide="x"
+                                    style="width:16px; height:16px; color:var(--text-muted);"></i> Dedicated Account
+                                Manager</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="scrollToContact()">Get Started</button>
+                    </div>
+
+                    <!-- Professional Plan (Popular) -->
+                    <div class="pricing-card glass-panel popular">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-plan-name">Professional</h3>
+                            <p class="pricing-plan-desc">For fast-growing companies and power developers needing
+                                dedicated collaboration agents.</p>
+                            <div class="pricing-cost">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" id="price-pro">99</span>
+                                <span class="price-period">/mo</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Up to 25 Active Agents</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> 150,000 Tasks Completed/mo</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Frontier & Custom LLMs</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> 500 GB Shared Memory Layer</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Custom RAG integrations</li>
+                            <li class="pricing-feature-item"
+                                style="color:var(--text-muted); text-decoration:line-through;"><i data-lucide="x"
+                                    style="width:16px; height:16px; color:var(--text-muted);"></i> Dedicated Account
+                                Manager</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="scrollToContact()">Upgrade to Pro</button>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card glass-panel">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-plan-name">Enterprise</h3>
+                            <p class="pricing-plan-desc">Tailored pipelines, strict tenant compliance, and raw agent
+                                scaling limits for large organizations.</p>
+                            <div class="pricing-cost">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" id="price-enterprise">499</span>
+                                <span class="price-period">/mo</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Unlimited AI Agents</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Unlimited Completed Tasks</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Enterprise SLA & private hosting</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Private PB Memory Layers</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Advanced RAG & API access</li>
+                            <li class="pricing-feature-item"><i data-lucide="check"
+                                    style="width:16px; height:16px;"></i> Dedicated Support Manager</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="scrollToContact()">Contact Enterprise</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Help Desk</span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-desc">Find answers to key technical and operational inquiries regarding the
+                        NexusOS AI ecosystem.</p>
+                </div>
+
+                <div class="faq-list">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">What is a multi-agent system?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>A multi-agent system consists of multiple specialized AI agents, each designed for a
+                                specific capability (such as writing code, indexing data, or creating styles). These
+                                agents communicate and coordinate automatically to break down, assign, and complete
+                                complex enterprise goals, rather than replying to prompts in isolation.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 2 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">Is my company data used to train the base model?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>No. NexusOS AI adheres to strict SOC2 and compliance requirements. All operational data,
+                                memory context, file repositories, and user conversation logs are sandboxed in private
+                                tenant slots and are never utilized to train base models or shared across commercial
+                                networks.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 3 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">How does RAG database querying work?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>Retrieval-Augmented Generation (RAG) lets NexusOS search and index structured databases,
+                                corporate PDFs, and websites in real time. It retrieves contextual information and
+                                inserts it directly into the AI's prompt windows, ensuring precise, factual outputs
+                                anchored in your company's data.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 4 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">Can I run custom LLM models locally?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>Yes. Enterprise tier users can run local models in private cloud sandboxes. NexusOS
+                                connects to private endpoints, allowing you to run models within your own secure VPC
+                                architecture.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 5 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">What languages does the coding agent support?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>The Developer AI agent natively writes, parses, and tests code in JavaScript/TypeScript,
+                                Python, Go, Rust, Java, C++, Ruby, PHP, and SQL, adapting to your existing codebase
+                                structure seamlessly.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 6 -->
+                    <div class="faq-item glass-panel">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">How does the monthly task limit work?</span>
+                            <span class="faq-icon-wrapper"><i data-lucide="chevron-down"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>A "task" is a single goal executed by an agent (e.g., compile a script, search a page, or
+                                summarize a meeting). Limits renew at the start of each billing cycle. If you hit your
+                                limit, you can easily top up your account or upgrade your tier directly from your
+                                billing tab.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Banner Section -->
+        <section class="cta-banner" style="position: relative; overflow: hidden; padding: 6rem 0;">
+            <div class="container reveal text-center" style="position: relative; z-index: 10;">
+                <div class="glass-panel"
+                    style="padding: 4rem 2rem; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color); background: rgba(14, 12, 22, 0.4); backdrop-filter: blur(12px);">
+                    <h2 class="section-title"
+                        style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--white); text-align: center;">Ready
+                        to Deploy Your AI Workforce?</h2>
+                    <p
+                        style="max-width: 600px; margin: 0 auto 2.5rem; color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; text-align: center;">
+                        Coordinate thousands of specialized agent minds to research, plan, design, and code your product
+                        ideas in real time. Launch your project workspace instantly.
+                    </p>
+                    <button class="btn btn-primary pulse-glow-btn" onclick="window.location.href='workspace.html'"
+                        style="padding: 1rem 2.5rem; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0 auto;">
+                        <i data-lucide="zap" style="width: 18px; height: 18px;"></i>
+                        Get Started Instantly
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="section-tag">Contact Center</span>
+                    <h2 class="section-title">Schedule a Consultation</h2>
+                    <p class="section-desc">Reach out to our system engineering team to discuss customized pipelines and
+                        enterprise deployments.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Connect with NexusOS</h3>
+                        <p style="color: var(--text-secondary);">Fill out the request form, or contact us directly via
+                            our support channels. We typically respond within 12 hours.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-detail-item">
+                                <div class="contact-detail-icon"><i data-lucide="mail"></i></div>
+                                <div>
+                                    <div class="contact-detail-lbl">Email Operations</div>
+                                    <div class="contact-detail-val"><a href="mailto:support@nexusos.ai"
+                                            style="color: var(--text-primary); text-decoration: none; hover: text-decoration: underline;">support@nexusos.ai</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="contact-detail-lbl" style="margin-bottom: 0.75rem;">Follow Our Development</div>
+                            <div class="social-links">
+                                <a href="https://linkedin.com" target="_blank" class="social-link"
+                                    aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                                <a href="https://github.com" target="_blank" class="social-link" aria-label="GitHub"><i
+                                        data-lucide="github"></i></a>
+                                <a href="https://twitter.com" target="_blank" class="social-link"
+                                    aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form class="contact-form glass-panel" id="contact-form">
+                        <div class="form-group">
+                            <label class="form-label" for="contact-name">Full Name</label>
+                            <input type="text" id="contact-name" class="form-input" placeholder="Alex Rivera" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contact-email">Corporate Email</label>
+                            <input type="email" id="contact-email" class="form-input" placeholder="alex@company.com"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contact-company">Organization Name</label>
+                            <input type="text" id="contact-company" class="form-input" placeholder="Enterprise Corp"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contact-msg">Inquiry Details</label>
+                            <textarea id="contact-msg" class="form-input"
+                                placeholder="Describe your team's automation goals..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit Request</button>
+                        <div class="form-status" id="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="logo">
+                        <div class="logo-icon"></div>
+                        NexusOS AI
+                    </a>
+                    <p class="footer-brand-desc">One Workspace. Thousands of AI Minds. Infinite Possibilities.
+                        Constructing the intelligent workforce of tomorrow.</p>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Home</a></li>
+                        <li><a href="#workforce" class="footer-link">AI Agents</a></li>
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#pricing" class="footer-link">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Blog</a></li>
+                        <li><a href="#home" class="footer-link">Careers</a></li>
+                        <li><a href="#faq" class="footer-link">FAQ Support</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#home" class="footer-link">Terms of Service</a></li>
+                        <li><a href="#home" class="footer-link">SOC2 Security</a></li>
+                        <li><a href="#home" class="footer-link">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 NexusOS AI Inc. All rights reserved. Built for private organizational workspaces.</div>
+                <div class="social-links" style="margin: 0;">
+                    <a href="https://linkedin.com" target="_blank" class="social-link"
+                        style="width: 32px; height: 32px;" aria-label="LinkedIn"><i data-lucide="linkedin"
+                            style="width:16px; height:16px;"></i></a>
+                    <a href="https://github.com" target="_blank" class="social-link" style="width: 32px; height: 32px;"
+                        aria-label="GitHub"><i data-lucide="github" style="width:16px; height:16px;"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-link" style="width: 32px; height: 32px;"
+                        aria-label="Twitter"><i data-lucide="twitter" style="width:16px; height:16px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Video Modal overlay -->
+    <div class="modal-overlay" id="demo-modal" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; font-weight:700;">
+                    <i data-lucide="play" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                    <span>System Workflow Demo: Build & Deploy Automation</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeDemoModal()" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="simulated-player">
+                    <div class="player-screen" id="modal-player-screen">
+                        <!-- Playback Logs stream dynamically -->
+                        <div class="terminal-line" style="color:var(--text-muted)">Press PLAY to stream system
+                            deployment workflow simulation...</div>
+                    </div>
+                    <div class="player-controls">
+                        <div class="player-buttons">
+                            <button class="play-toggle-btn" id="modal-play-btn" onclick="toggleModalPlayback()">
+                                <i data-lucide="play" style="width: 16px; height: 16px; margin-right: 6px;"></i>
+                                <span>PLAY</span>
+                            </button>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="modal-progress-bar"></div>
+                        </div>
+                        <div id="modal-time-display" style="min-width: 80px; text-align: right;">00:00 / 00:30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
