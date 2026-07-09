@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const INQUIRIES_FILE = path.join(__dirname, 'inquiries.json');
 const GENERATED_DIR = path.join(__dirname, 'generated_startups');
 
